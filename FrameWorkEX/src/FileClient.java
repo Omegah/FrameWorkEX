@@ -9,6 +9,7 @@ public class FileClient {
 		 * System.exit(0); }
 		 */
 		try {
+			
 			String name = "//localhost/FileServer";
 			FileInterface fi = (FileInterface) Naming.lookup(name);
 			byte[] filedata = fi.downloadFile("f1.txt");
