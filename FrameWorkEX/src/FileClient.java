@@ -10,9 +10,9 @@ public class FileClient {
 		 */
 		try {
 			
-			String name = "//localhost/FileServer";
+			String name = "//152.77.82.177/FileServer";
 			FileInterface fi = (FileInterface) Naming.lookup(name);
-			byte[] filedata = fi.downloadFile("f1.txt");
+			byte[] filedata = fi.downloadFile("f2.txt");
 			File file = new File("fcopy.txt");
 			BufferedOutputStream output = new BufferedOutputStream(
 					new FileOutputStream(file.getName()));
