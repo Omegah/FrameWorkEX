@@ -32,7 +32,7 @@ public class ClientAsynchrone {
 			this.IpServeur=IpServeur;
 			SUrl= "//"+IpServeur+":"+port+"/Chat";
 			//SUrl= "/"+IpServeur+"/FileServer";
-			m = (MessageInterface) Naming.lookup(SUrl);
+			ob = (ObjectInterface) Naming.lookup(SUrl);
 
 		} catch (Exception e) {
 			System.err.println("FileServer exception: " + e.getMessage());

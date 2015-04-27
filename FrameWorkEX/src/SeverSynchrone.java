@@ -18,12 +18,12 @@ public class SeverSynchrone {
     	this.port=port;   	
     	//ObjectInterface ob = new ObjectImpl();
     	
-    	MessageInterface m = new Message();
+    	ObjectInterface o = new ObjectImpl();
     	
         //   System.out.println(ressources.getString("ServeurChatImpl.RMIRegister"));
         LocateRegistry.createRegistry(port);
         // Lie a l'adresse indiquee a l'objet distant ServeurChatImpl.
-        Naming.rebind("//" + adresse + ":" + port + "/Chat", m);
+        Naming.rebind("//" + adresse + ":" + port + "/Chat", o);
     }
 
 }
