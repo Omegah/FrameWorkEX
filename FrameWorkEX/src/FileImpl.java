@@ -26,4 +26,6 @@ public class FileImpl extends UnicastRemoteObject implements FileInterface {
 			return (null);
 		}
 	}
+	
+	// public void CheckFileName()
 }
