@@ -6,6 +6,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import server.Server;
 import server._Server;
@@ -14,7 +15,7 @@ public abstract class User extends UnicastRemoteObject implements _User, Seriali
 	protected String uName;
 	protected String ipServer;
 	protected _Server server;
-	protected String[] values;
+	protected ArrayList<String> values;
 	
 	
 	  public String getuName() {
@@ -41,8 +42,11 @@ public abstract class User extends UnicastRemoteObject implements _User, Seriali
 	
 	public abstract void execute(String name, Object obj);
 	public abstract void start(String uName, Object obj);
-	public abstract void setOnlineusers(String[] activeUsers);
-	
+	public synchronized void setOnlineusers(ArrayList<String> activeUsers) {
+		System.out.println("HELLO");
+		blabla(activeUsers);
+	}
+	public abstract void blabla(ArrayList<String> activeUsers);
 	public void getUsers() {
 		// TODO Auto-generated method stub
 			try {

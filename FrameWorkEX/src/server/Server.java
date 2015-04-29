@@ -5,6 +5,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -13,6 +14,7 @@ public class Server extends UnicastRemoteObject implements _Server{
 	
 	private Hashtable<String, Object> users;
 	private Enumeration<Object> eUsers;
+	private ArrayList<String> listUsers;
 	private Message m;
 	
 	public Server(String adress,int port) throws RemoteException
@@ -26,16 +28,16 @@ public class Server extends UnicastRemoteObject implements _Server{
 			e.printStackTrace();
 		}
 		users = new Hashtable<String, Object>();
+		listUsers = new ArrayList<String>();
 	}
 	
 	public synchronized boolean registerUser(String name,Object newUser) {
 		users.put(name, newUser);
-		
+		listUsers.add(name);
 		eUsers = users.elements();
 		while (eUsers.hasMoreElements()) {
 			_User user = ((_User) eUsers.nextElement());
 			try {
-				System.out.println(user.getuName());
 				user.setOnlineusers(getActiveUsers());
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
@@ -51,12 +53,6 @@ public class Server extends UnicastRemoteObject implements _Server{
 		while (eUsers.hasMoreElements()) {
 			_User user = ((_User) eUsers.nextElement());
 			try {
-				System.out.println(user.getuName());
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
 				user.receiveObject(name,obj);
 			} catch (RemoteException ex) {
 				ex.printStackTrace();
@@ -66,23 +62,10 @@ public class Server extends UnicastRemoteObject implements _Server{
 
 	public synchronized void removeUser(String name) {
 		users.remove(name);
+		listUsers.remove(name);
 	}
 	
-	public synchronized String[] getActiveUsers() {
-		
-		int i=0;
-		String[] tab = new String[10];
-		eUsers = users.elements();
-		while (eUsers.hasMoreElements()) {
-			_User user = ((_User) eUsers.nextElement());
-			try {
-				System.out.println(user.getuName());
-				tab[i++] = user.getuName();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return tab;
+	public ArrayList<String> getActiveUsers() {
+		return listUsers;
 	}
 }

@@ -17,6 +17,7 @@ import javax.swing.border.MatteBorder;
 
 import java.awt.Color;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -30,9 +31,9 @@ public class TestWIndowBuilder {
 	TestWIndowBuilder windows;
 	JFrame frame;
 	protected JTextField textField;
-	private String[] values;
+	private ArrayList<String> values;
 	private Enumeration<Object> eUsers;
-	public static JTextArea txtrJeanLouis;
+	public static JTextArea txtarea;
 	protected JButton btnEnvoyer;
 	Hashtable<String, Object> table;
 	private JList list;
@@ -60,17 +61,15 @@ public class TestWIndowBuilder {
 		list.setBounds(25, 45, 167, 206);
 		frame.getContentPane().add(list);
 
-		txtrJeanLouis = new JTextArea();
-		txtrJeanLouis.setText("");
-		txtrJeanLouis.setEditable(false);
-		txtrJeanLouis.setBounds(25, 295, 548, 135);
-		JScrollPane sp = new JScrollPane(txtrJeanLouis); // JTextArea is placed
-															// in a JScrollPane.
-		sp.setBounds(10, 260, 50, 50);
-		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		frame.getContentPane().add(sp);
-		frame.getContentPane().add(txtrJeanLouis);
-
+		
+		
+		txtarea = new JTextArea();
+		txtarea.setText("");
+		txtarea.setEditable(false);
+		JScrollPane scroll = new JScrollPane (txtarea);
+		scroll.setBounds(25, 295, 548, 135);
+		frame.getContentPane().add(scroll);
+		
 		btnEnvoyer = new JButton("Envoyer");
 		btnEnvoyer.setBackground(new Color(51, 153, 255));
 		btnEnvoyer.setBounds(456, 438, 117, 25);
@@ -105,18 +104,19 @@ public class TestWIndowBuilder {
 		frame.setVisible(true);
 	}
 	
-	public void majUsers(String[] a) {
+	public void majUsers(ArrayList<String> a) {
 		values = a;
 		list.removeAll();
 		list.setModel(new AbstractListModel() {
 			public int getSize() {
-				return values.length;
+				return values.size();
 			}
 
 			public Object getElementAt(int index) {
-				return values[index];
+				return values.get(index);
 			}
 		});
+		//list.repaint();
 		frame.repaint();
 	}
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -28,7 +29,6 @@ public class OurUser extends User {
 
 	MessageInterface m;
 	TestWIndowBuilder windows;
-	private String[] values;
 	  
 	public OurUser(String uName, String ipServer) throws RemoteException {
 		super();
@@ -49,7 +49,8 @@ public class OurUser extends User {
 		try {
 			m =((MessageInterface)obj);
 			System.out.println(m.getMessageHeure());
-			windows.txtrJeanLouis.append(m.getMessageHeure() + "\n");
+			windows.txtarea.append(m.getMessageHeure() + "\n");
+			windows.txtarea.setCaretPosition(windows.txtarea.getDocument().getLength());
 			windows.frame.repaint();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -69,7 +70,8 @@ public class OurUser extends User {
 		
 	}
 	
-	public void setOnlineusers(String[] activeUsers) {	
+	public void blabla(ArrayList<String> activeUsers) {
+		System.out.println("PASSAGE");
 		windows.majUsers(activeUsers);
 	}
 	
