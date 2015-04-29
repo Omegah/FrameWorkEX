@@ -32,11 +32,14 @@ public class TestWIndowBuilder {
 	JFrame frame;
 	protected JTextField textField;
 	private ArrayList<String> values;
+	private ArrayList<String> files;
 	private Enumeration<Object> eUsers;
 	public static JTextArea txtarea;
 	protected JButton btnEnvoyer;
+	protected JButton btnNewButton;
 	Hashtable<String, Object> table;
 	private JList list;
+	protected JList list_1;
 
 	/**
 	 * Create the application.
@@ -55,7 +58,7 @@ public class TestWIndowBuilder {
 		frame.setBounds(100, 100, 600, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		files = new ArrayList<String>();
 		list = new JList();
 		list.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		list.setBounds(25, 45, 167, 206);
@@ -86,12 +89,22 @@ public class TestWIndowBuilder {
 		lblUtilisateursConnects.setBounds(24, 15, 191, 19);
 		frame.getContentPane().add(lblUtilisateursConnects);
 
-		JList list_1 = new JList();
+		list_1 = new JList();
 		list_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		list_1.setBounds(237, 45, 333, 154);
+		files.add("test.txt");
+		list_1.setModel(new AbstractListModel() {
+			public int getSize() {
+				return files.size();
+			}
+
+			public Object getElementAt(int index) {
+				return files.get(index);
+			}
+		});
 		frame.getContentPane().add(list_1);
 
-		JButton btnNewButton = new JButton("Envoyer");
+		btnNewButton = new JButton("Envoyer");
 		btnNewButton.setBackground(new Color(0, 153, 255));
 
 		btnNewButton.setBounds(326, 211, 147, 40);

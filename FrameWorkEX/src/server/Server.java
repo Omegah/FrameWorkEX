@@ -59,6 +59,18 @@ public class Server extends UnicastRemoteObject implements _Server{
 			}
 		}
 	}
+	
+	public synchronized void sendFile(String name, byte[] buf) {
+		eUsers = users.elements();
+		while (eUsers.hasMoreElements()) {
+			_User user = ((_User) eUsers.nextElement());
+			try {
+				user.receiveFile(name,buf);
+			} catch (RemoteException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 
 	public synchronized void removeUser(String name) {
 		users.remove(name);

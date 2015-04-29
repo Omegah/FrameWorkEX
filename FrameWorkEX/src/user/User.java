@@ -1,5 +1,12 @@
 package user;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -40,12 +47,37 @@ public abstract class User extends UnicastRemoteObject implements _User, Seriali
 		execute(name,obj);
 	}
 	
+	public synchronized void receiveFile(String name, byte[] file) {
+		try {
+			executeFile(name,file);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public abstract void execute(String name, Object obj);
+	public abstract void executeFile(String name, Object obj);
 	public abstract void start(String uName, Object obj);
 	public synchronized void setOnlineusers(ArrayList<String> activeUsers) {
 		System.out.println("HELLO");
 		blabla(activeUsers);
 	}
+	
+	public synchronized byte[] downloadFile(String name, String fileName) {
+		try {
+			File file = new File(fileName);
+			byte buffer[] = new byte[(int) file.length()];
+			BufferedInputStream input = new BufferedInputStream(
+					new FileInputStream(file.getName()));
+			input.read(buffer, 0, buffer.length);
+			input.close();
+			return buffer;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public abstract void blabla(ArrayList<String> activeUsers);
 	public void getUsers() {
 		// TODO Auto-generated method stub
@@ -69,6 +101,8 @@ public abstract class User extends UnicastRemoteObject implements _User, Seriali
 			ex.printStackTrace();
 		}
 	}
+	
+	
 	
 	public String getName() {
 		return uName;

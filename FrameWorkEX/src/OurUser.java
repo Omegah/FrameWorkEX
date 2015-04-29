@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -29,7 +34,6 @@ public class OurUser extends User {
 
 	MessageInterface m;
 	TestWIndowBuilder windows;
-	  
 	public OurUser(String uName, String ipServer) throws RemoteException {
 		super();
 
@@ -53,6 +57,23 @@ public class OurUser extends User {
 			windows.txtarea.setCaretPosition(windows.txtarea.getDocument().getLength());
 			windows.frame.repaint();
 		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void executeFile(String name, byte[] file) {
+		
+		try {
+			File dl = new File("testresult.txt");
+			BufferedOutputStream output = new BufferedOutputStream(
+					new FileOutputStream(dl.getName()));
+			output.write(file,0,file.length);
+			output.flush();
+			output.close();
+			
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -111,6 +132,23 @@ public class OurUser extends User {
 				}
 			}
 		});
+		
+		windows.btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					server.sendFile(uName, downloadFile(uName, windows.list_1.getSelectedValue().toString()));
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	@Override
+	public void executeFile(String name, Object obj) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
