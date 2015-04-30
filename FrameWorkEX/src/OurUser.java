@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -36,21 +37,20 @@ public class OurUser extends User {
 	MessageInterface m;
 	TestWIndowBuilder windows;
 
-	public OurUser(String uName, String ipServer) throws RemoteException {
+	public OurUser(String osef, String ipServer) throws RemoteException {
 		super();
 
 		initialize();
-		this.uName = uName;
+		
+		this.uName = JOptionPane.showInputDialog("Entrez votre nom d'utilisateur");
 		super.ipServer = ipServer;
 		importServer();
+		windows.frame.setTitle(uName);
 		server.registerUser(uName, this);
-
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void execute(String name, Object obj) {
-		// TODO Auto-generated method stub
 
 		try {
 			m = ((MessageInterface) obj);
@@ -74,6 +74,12 @@ public class OurUser extends User {
 			output.write(file, 0, file.length);
 			output.flush();
 			output.close();
+			if (!name.equals(uName)) {
+				windows.txtarea.append(name + " vous a envoyé un fichier !\n");
+				windows.txtarea.setCaretPosition(windows.txtarea.getDocument()
+						.getLength());
+				windows.frame.repaint();
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
