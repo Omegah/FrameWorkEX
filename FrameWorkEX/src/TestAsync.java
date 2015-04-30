@@ -9,7 +9,7 @@ public class TestAsync  {
 	public static void main(String[] args) {
 		UserServer serv = null;
 		try {
-			serv = new UserServer(1099, "152.77.82.230");
+			serv = new UserServer(1099, "152.77.82.2");
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

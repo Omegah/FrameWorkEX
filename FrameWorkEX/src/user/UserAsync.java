@@ -18,7 +18,7 @@ public class UserAsync extends UnicastRemoteObject  implements _UserAsync {
 	_ServerDepot server;
 	
 	
-	protected UserAsync() throws RemoteException {
+	public UserAsync() throws RemoteException {
 		super();
 		
 	}
@@ -29,7 +29,7 @@ public class UserAsync extends UnicastRemoteObject  implements _UserAsync {
 		File file = new File(name);
 		try {
 		BufferedOutputStream output = new BufferedOutputStream(
-				new FileOutputStream(file.getName()));
+				new FileOutputStream(file.getName() + "copie2"));
 		
 			output.write(buffer, 0, buffer.length);
 			output.flush();
@@ -37,6 +37,7 @@ public class UserAsync extends UnicastRemoteObject  implements _UserAsync {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	@Override

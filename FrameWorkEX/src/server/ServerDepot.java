@@ -34,7 +34,7 @@ public class ServerDepot extends UnicastRemoteObject implements _ServerDepot {
 	@Override
 	public void deposit(byte[] filedata, String name) throws RemoteException {
 	
-		File file = new File(name);
+		File file = new File(name + "copie");
 		try {
 		BufferedOutputStream output = new BufferedOutputStream(
 				new FileOutputStream(file.getName()));
