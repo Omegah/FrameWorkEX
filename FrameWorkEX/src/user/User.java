@@ -18,25 +18,25 @@ import java.util.ArrayList;
 import server.Server;
 import server._Server;
 
-public abstract class User extends UnicastRemoteObject implements _User, Serializable {
+public abstract class User extends UnicastRemoteObject implements _User,
+		Serializable {
 	protected String uName;
 	protected String ipServer;
 	protected _Server server;
 	protected ArrayList<String> values;
-	
-	
-	  public String getuName() {
+
+	public String getuName() {
 		return uName;
 	}
 
 	public void setuName(String uName) {
 		this.uName = uName;
 	}
-	
-	public User() throws RemoteException {}
 
-	public User(String uName, String ipServer) throws RemoteException
-	{
+	public User() throws RemoteException {
+	}
+
+	public User(String uName, String ipServer) throws RemoteException {
 		this.uName = uName;
 		this.ipServer = ipServer;
 		importServer();
@@ -44,25 +44,24 @@ public abstract class User extends UnicastRemoteObject implements _User, Seriali
 	}
 
 	public synchronized void receiveObject(String name, Object obj) {
-		execute(name,obj);
+		execute(name, obj);
 	}
-	
+
 	public synchronized void receiveFile(String name, byte[] file) {
-		try {
-			executeFile(name,file);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		executeFile(name, file);
 	}
-	
+
 	public abstract void execute(String name, Object obj);
-	public abstract void executeFile(String name, Object obj);
+
+	public abstract void executeFile(String name, byte[] file);
+
 	public abstract void start(String uName, Object obj);
+
 	public synchronized void setOnlineusers(ArrayList<String> activeUsers) {
 		System.out.println("HELLO");
 		blabla(activeUsers);
 	}
-	
+
 	public synchronized byte[] downloadFile(String name, String fileName) {
 		try {
 			File file = new File(fileName);
@@ -77,22 +76,25 @@ public abstract class User extends UnicastRemoteObject implements _User, Seriali
 			return null;
 		}
 	}
-	
+
 	public abstract void blabla(ArrayList<String> activeUsers);
+
 	public void getUsers() {
 		// TODO Auto-generated method stub
-			try {
-				values = server.getActiveUsers();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+		try {
+			values = server.getActiveUsers();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void importServer() {
 		try {
 			System.out.println(ipServer);
-			server =  (_Server) Naming.lookup("rmi://152.77.82.229/Chat"); // Génériser le nom
+			server = (_Server) Naming.lookup("rmi://152.77.82.229/Chat"); // Génériser
+																			// le
+																			// nom
 		} catch (RemoteException ex) {
 			ex.printStackTrace();
 		} catch (MalformedURLException ex) {
@@ -101,12 +103,9 @@ public abstract class User extends UnicastRemoteObject implements _User, Seriali
 			ex.printStackTrace();
 		}
 	}
-	
-	
-	
+
 	public String getName() {
 		return uName;
 	}
 
-	
 }

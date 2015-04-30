@@ -29,11 +29,11 @@ import server.Server;
 import user.User;
 import user._User;
 
-
 public class OurUser extends User {
 
 	MessageInterface m;
 	TestWIndowBuilder windows;
+
 	public OurUser(String uName, String ipServer) throws RemoteException {
 		super();
 
@@ -43,59 +43,56 @@ public class OurUser extends User {
 		importServer();
 		server.registerUser(uName, this);
 
-		// TODO Auto-generated constructor stub				
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void execute(String name, Object obj) {
 		// TODO Auto-generated method stub
-		
+
 		try {
-			m =((MessageInterface)obj);
-			System.out.println(m.getMessageHeure());
+			m = ((MessageInterface) obj);
+			// System.out.println(m.getMessageHeure());
 			windows.txtarea.append(m.getMessageHeure() + "\n");
-			windows.txtarea.setCaretPosition(windows.txtarea.getDocument().getLength());
+			windows.txtarea.setCaretPosition(windows.txtarea.getDocument()
+					.getLength());
 			windows.frame.repaint();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void executeFile(String name, byte[] file) {
-		
+
 		try {
 			File dl = new File("testresult.txt");
 			BufferedOutputStream output = new BufferedOutputStream(
 					new FileOutputStream(dl.getName()));
-			output.write(file,0,file.length);
+			output.write(file, 0, file.length);
 			output.flush();
 			output.close();
-			
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void start(String uName, Object obj) {
-		// TODO Auto-generated method stub
 		try {
 			server.sendObject(uName, obj);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void blabla(ArrayList<String> activeUsers) {
 		System.out.println("PASSAGE");
 		windows.majUsers(activeUsers);
 	}
-	
+
 	private void initialize() {
 		windows = new TestWIndowBuilder();
 
@@ -110,7 +107,6 @@ public class OurUser extends User {
 					windows.textField.setText("");
 
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -127,29 +123,23 @@ public class OurUser extends User {
 					windows.textField.setText("");
 
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
-		
+
 		windows.btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					server.sendFile(uName, downloadFile(uName, windows.list_1.getSelectedValue().toString()));
+					server.sendFile(
+							uName,
+							downloadFile(uName, windows.list_1
+									.getSelectedValue().toString()));
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
-	@Override
-	public void executeFile(String name, Object obj) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }
