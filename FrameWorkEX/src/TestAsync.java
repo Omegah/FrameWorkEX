@@ -1,15 +1,15 @@
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
-import server.ClientServer;
+import server.UserServer;
 
 
 public class TestAsync  {
 	
 	public static void main(String[] args) {
-		ClientServer serv = null;
+		UserServer serv = null;
 		try {
-			serv = new ClientServer(1099, "152.77.82.230");
+			serv = new UserServer(1099, "152.77.82.230");
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

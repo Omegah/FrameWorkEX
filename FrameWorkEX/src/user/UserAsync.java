@@ -1,4 +1,4 @@
-package server;
+package user;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -10,79 +10,55 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 
-public class ClientServer extends UnicastRemoteObject implements _ServerAsync {
+import server._ServerDepot;
 
-	private _ServerAsync server;
+public class UserAsync extends UnicastRemoteObject  implements _UserAsync {
+	_ServerDepot server;
 	
-	public ClientServer(int Port, String ip) throws RemoteException {
+	
+	protected UserAsync() throws RemoteException {
+		super();
 		
-		try {
-			
-			LocateRegistry.createRegistry(Port);
-			try {
-				Naming.rebind("rmi://"+ ip +"/Chat", this);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
-	
-	public _ServerAsync getServ(){
-		return server;
-	}
-	
+
 	@Override
-	public void takeObject(String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		byte[] filedata = server.sendObject(name);
+	public void pull(String name) throws RemoteException {
+		byte buffer[]  = server.pull(name);
 		File file = new File(name);
 		try {
 		BufferedOutputStream output = new BufferedOutputStream(
 				new FileOutputStream(file.getName()));
 		
-			output.write(filedata, 0, filedata.length);
+			output.write(buffer, 0, buffer.length);
 			output.flush();
 			output.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
 	}
 
 	@Override
-	public byte[] sendObject(String name) throws RemoteException {
-		File file = new File(name);
+	public void deposit(String fileName) throws RemoteException {
+		File file = new File(fileName);
 		byte buffer[] = new byte[(int) file.length()];
 		try {
 		BufferedInputStream input = new BufferedInputStream(
-				new FileInputStream(name));
+				new FileInputStream(fileName));
 		
 			input.read(buffer, 0, buffer.length);
 		
 		input.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return (buffer);
+		server.deposit(buffer, fileName);
 	}
 
-
-
-	@Override
 	public void connectServer(String ipServer) throws RemoteException {
 		try {
-			server = (_ServerAsync) Naming.lookup("rmi://" + ipServer + "/Chat");
+			server = (_ServerDepot) Naming.lookup("rmi://" + ipServer + "/Chat");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
