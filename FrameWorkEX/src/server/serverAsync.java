@@ -36,10 +36,12 @@ public class serverAsync implements _ServerAsync {
 		}
 	}
 	
-	
+	public _ServerAsync getServ(){
+		return server;
+	}
 	
 	@Override
-	public File takeObject(String name) throws RemoteException {
+	public void takeObject(String name) throws RemoteException {
 		// TODO Auto-generated method stub
 		byte[] filedata = server.sendObject(name);
 		File file = new File(name);
@@ -56,10 +58,9 @@ public class serverAsync implements _ServerAsync {
 		}
 
 		
-		return(file);
 	}
 
-	@Override
+
 	public void addObject(String name) throws RemoteException {
 		listObject.add(name);
 
