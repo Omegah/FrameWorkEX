@@ -11,6 +11,8 @@ import javax.swing.ScrollPaneConstants;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.Font;
 
 import javax.swing.border.MatteBorder;
@@ -33,7 +35,6 @@ public class TestWIndowBuilder {
 	protected JTextField textField;
 	private ArrayList<String> values;
 	private ArrayList<String> files;
-	private Enumeration<Object> eUsers;
 	public static JTextArea txtarea;
 	protected JButton btnEnvoyer;
 	protected JButton btnNewButton;
@@ -63,7 +64,6 @@ public class TestWIndowBuilder {
 		list.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		list.setBounds(25, 45, 167, 206);
 		frame.getContentPane().add(list);
-
 		
 		
 		txtarea = new JTextArea();

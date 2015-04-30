@@ -75,6 +75,16 @@ public class Server extends UnicastRemoteObject implements _Server{
 	public synchronized void removeUser(String name) {
 		users.remove(name);
 		listUsers.remove(name);
+		eUsers = users.elements();
+		while (eUsers.hasMoreElements()) {
+			_User user = ((_User) eUsers.nextElement());
+			try {
+				user.setOnlineusers(getActiveUsers());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public ArrayList<String> getActiveUsers() {

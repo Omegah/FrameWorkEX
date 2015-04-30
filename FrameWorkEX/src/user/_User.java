@@ -25,7 +25,7 @@ public interface _User extends Remote {
 	public void setOnlineusers(ArrayList<String> activeUsers)
 			throws RemoteException;
 
-	public byte[] downloadFile(String name, String fileName)
+	public byte[] downloadFile(String fileName)
 			throws RemoteException;
 
 }

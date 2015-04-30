@@ -58,11 +58,10 @@ public abstract class User extends UnicastRemoteObject implements _User,
 	public abstract void start(String uName, Object obj);
 
 	public synchronized void setOnlineusers(ArrayList<String> activeUsers) {
-		System.out.println("HELLO");
 		blabla(activeUsers);
 	}
 
-	public synchronized byte[] downloadFile(String name, String fileName) {
+	public synchronized byte[] downloadFile(String fileName) {
 		try {
 			File file = new File(fileName);
 			byte buffer[] = new byte[(int) file.length()];

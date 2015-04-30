@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,12 +91,24 @@ public class OurUser extends User {
 	}
 
 	public void blabla(ArrayList<String> activeUsers) {
-		System.out.println("PASSAGE");
 		windows.majUsers(activeUsers);
 	}
 
 	private void initialize() {
 		windows = new TestWIndowBuilder();
+		
+		windows.frame.addWindowListener(new WindowAdapter()
+		{
+		    public void windowClosing(WindowEvent e)
+		    {
+		    	try {
+					server.removeUser(uName);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		    }
+		});
 
 		windows.textField.addActionListener(new ActionListener() {
 
@@ -133,8 +147,7 @@ public class OurUser extends User {
 				try {
 					server.sendFile(
 							uName,
-							downloadFile(uName, windows.list_1
-									.getSelectedValue().toString()));
+							downloadFile(windows.list_1.getSelectedValue().toString()));
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
