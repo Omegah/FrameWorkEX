@@ -88,7 +88,6 @@ public class Server extends UnicastRemoteObject implements _Server{
 			try {
 				user.setOnlineusers(getActiveUsers());
 			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
