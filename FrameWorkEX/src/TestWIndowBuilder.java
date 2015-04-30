@@ -18,6 +18,7 @@ import java.awt.Font;
 import javax.swing.border.MatteBorder;
 
 import java.awt.Color;
+import java.io.File;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -92,7 +93,7 @@ public class TestWIndowBuilder {
 		list_1 = new JList();
 		list_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		list_1.setBounds(237, 45, 333, 154);
-		files.add("test.txt");
+		majFiles();
 		list_1.setModel(new AbstractListModel() {
 			public int getSize() {
 				return files.size();
@@ -131,5 +132,13 @@ public class TestWIndowBuilder {
 		});
 		//list.repaint();
 		frame.repaint();
+	}
+	
+	private void majFiles() {
+		File directory = new File("files/");
+		File[] tabFiles=directory.listFiles();
+		for(int i=0 ; i<tabFiles.length ; i++) {
+			files.add(tabFiles[i].getName());
+		}
 	}
 }

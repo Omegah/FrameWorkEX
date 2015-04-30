@@ -104,7 +104,6 @@ public class OurUser extends User {
 		    	try {
 					server.removeUser(uName);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		    }

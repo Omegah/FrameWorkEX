@@ -55,7 +55,14 @@ public class Server extends UnicastRemoteObject implements _Server{
 			try {
 				user.receiveObject(name,obj);
 			} catch (RemoteException ex) {
-				ex.printStackTrace();
+				//ex.printStackTrace();
+				try {
+					System.out.println("[TEST]->"+user.getuName());
+					removeUser(user.getuName());
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

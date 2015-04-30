@@ -63,10 +63,10 @@ public abstract class User extends UnicastRemoteObject implements _User,
 
 	public synchronized byte[] downloadFile(String fileName) {
 		try {
-			File file = new File(fileName);
+			File file = new File("files/"+fileName);
 			byte buffer[] = new byte[(int) file.length()];
 			BufferedInputStream input = new BufferedInputStream(
-					new FileInputStream(file.getName()));
+					new FileInputStream("files/" + fileName));
 			input.read(buffer, 0, buffer.length);
 			input.close();
 			return buffer;
