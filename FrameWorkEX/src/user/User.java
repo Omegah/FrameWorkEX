@@ -15,7 +15,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import server.Server;
+import server.ServerSync;
 import server._Server;
 
 public abstract class User extends UnicastRemoteObject implements _User,

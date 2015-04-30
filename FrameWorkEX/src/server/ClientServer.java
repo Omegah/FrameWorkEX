@@ -11,15 +11,14 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class serverAsync implements _ServerAsync {
+public class ClientServer extends UnicastRemoteObject implements _ServerAsync {
 
-	private ArrayList<String> listObject;
 	private _ServerAsync server;
 	
-	public serverAsync(int Port, String ip){
-		listObject = new ArrayList<String>();
+	public ClientServer(int Port, String ip) throws RemoteException {
 		
 		try {
 			
@@ -58,12 +57,6 @@ public class serverAsync implements _ServerAsync {
 		}
 
 		
-	}
-
-
-	public void addObject(String name) throws RemoteException {
-		listObject.add(name);
-
 	}
 
 	@Override

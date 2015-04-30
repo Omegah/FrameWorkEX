@@ -10,14 +10,14 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import user._User;
-public class Server extends UnicastRemoteObject implements _Server{
+public class ServerSync extends UnicastRemoteObject implements _Server{
 	
 	private Hashtable<String, Object> users;
 	private Enumeration<Object> eUsers;
 	private ArrayList<String> listUsers;
 	private Message m;
 	
-	public Server(String adress,int port) throws RemoteException
+	public ServerSync(String adress,int port) throws RemoteException
 	{
         m = new Message();
 		LocateRegistry.createRegistry(port);

@@ -1,13 +1,19 @@
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
-import server.serverAsync;
+import server.ClientServer;
 
 
-public class TestAsync {
+public class TestAsync  {
 	
 	public static void main(String[] args) {
-		serverAsync serv = new serverAsync(1099, "152.77.82.230");
+		ClientServer serv = null;
+		try {
+			serv = new ClientServer(1099, "152.77.82.230");
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Scanner sc = new Scanner(System.in);
 		String ip = sc.nextLine();
 		try {

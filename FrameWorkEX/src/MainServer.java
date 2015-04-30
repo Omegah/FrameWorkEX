@@ -1,12 +1,12 @@
 import java.rmi.RemoteException;
 
-import server.Server;
+import server.ServerSync;
 
 public class MainServer {
 
 	public static void main(String[] args) {
 		try {
-			Server server = new Server("152.77.82.229", 1099);
+			ServerSync server = new ServerSync("152.77.82.229", 1099);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

@@ -26,7 +26,7 @@ import java.util.Hashtable;
 
 import javax.swing.AbstractListModel;
 
-import server.Server;
+import server.ServerSync;
 
 public class TestWIndowBuilder {
 

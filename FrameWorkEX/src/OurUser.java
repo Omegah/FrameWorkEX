@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.MatteBorder;
 
-import server.Server;
+import server.ServerSync;
 import user.User;
 import user._User;
 
