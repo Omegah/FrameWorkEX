@@ -160,6 +160,13 @@ public class OurUser extends UserSync {
 				}
 			}
 		});
+		
+		windows.btnActu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				windows.majFiles();
+				windows.frame.repaint();
+			}
+		});
 
 		windows.btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
