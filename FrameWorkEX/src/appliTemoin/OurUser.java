@@ -31,20 +31,18 @@ public class OurUser extends UserSync {
 		importServer(ipServer,port);
 		
 		while(!server.registerUser(uName, this)) {
-			//JOptionPane.showMessageDialog(null, "Pseudo non disponible, prends en un autre mec !");
 			this.uName = JOptionPane.showInputDialog(null, "Pseudo non disponible\nChoisissez un nouveau pseudo : ");
 		}
 		windows.frame.setTitle(uName);
 	}
 
 	@Override
-	public void execute(String name, Object obj) {
+	public void execute(String filename, Object obj) {
 		if(obj instanceof _Message){
 			message = ((_Message) obj);
 			try {
 				windows.txtarea.append(message.getMessageHeure() + "\n");
 			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			windows.txtarea.setCaretPosition(windows.txtarea.getDocument()
@@ -53,18 +51,14 @@ public class OurUser extends UserSync {
 		}
 		else{
 			try {
-				File dl = new File("testresult.txt");
 				BufferedOutputStream output = new BufferedOutputStream(
-						new FileOutputStream(dl.getName()));
+						new FileOutputStream("files/" + filename));
 				output.write(((byte[])obj), 0, ((byte[])obj).length);
 				output.flush();
 				output.close();
-				if (!name.equals(uName)) {
-					windows.txtarea.append(name + " vous a envoyé un fichier !\n");
-					windows.txtarea.setCaretPosition(windows.txtarea.getDocument()
-							.getLength());
-					windows.frame.repaint();
-				}
+				windows.txtarea.append("Partage du fichier \"" + filename + "\"\n");
+				windows.txtarea.setCaretPosition(windows.txtarea.getDocument().getLength());
+				windows.frame.repaint();
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -170,7 +164,7 @@ public class OurUser extends UserSync {
 		windows.btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					server.send(uName, downloadFile(windows.list_1.getSelectedValue().toString()));
+					server.send(windows.list_1.getSelectedValue().toString(), downloadFile(windows.list_1.getSelectedValue().toString()));
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}
