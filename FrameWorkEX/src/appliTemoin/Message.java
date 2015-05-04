@@ -1,11 +1,11 @@
-package user;
+package appliTemoin;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Calendar;
 
 
-public class Message extends UnicastRemoteObject implements MessageInterface {
+public class Message extends UnicastRemoteObject implements _Message {
 	
     private String message;
     private String expediteur;

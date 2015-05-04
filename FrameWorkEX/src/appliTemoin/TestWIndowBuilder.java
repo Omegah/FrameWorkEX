@@ -1,3 +1,4 @@
+package appliTemoin;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -26,11 +27,10 @@ import java.util.Hashtable;
 
 import javax.swing.AbstractListModel;
 
-import server.Server;
+import server.ServerSync;
 
 public class TestWIndowBuilder {
 
-	MessageInterface m;
 	TestWIndowBuilder windows;
 	JFrame frame;
 	protected JTextField textField;
@@ -130,7 +130,6 @@ public class TestWIndowBuilder {
 				return values.get(index);
 			}
 		});
-		//list.repaint();
 		frame.repaint();
 	}
 	
