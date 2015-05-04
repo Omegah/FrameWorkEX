@@ -38,6 +38,7 @@ public class TestWIndowBuilder {
 	private ArrayList<String> files;
 	public static JTextArea txtarea;
 	protected JButton btnEnvoyer;
+	protected JButton btnActu;
 	protected JButton btnNewButton;
 	Hashtable<String, Object> table;
 	private JList list;
@@ -94,23 +95,19 @@ public class TestWIndowBuilder {
 		list_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		list_1.setBounds(237, 45, 333, 154);
 		majFiles();
-		list_1.setModel(new AbstractListModel() {
-			public int getSize() {
-				return files.size();
-			}
 
-			public Object getElementAt(int index) {
-				return files.get(index);
-			}
-		});
 		frame.getContentPane().add(list_1);
 
 		btnNewButton = new JButton("Envoyer");
 		btnNewButton.setBackground(new Color(0, 153, 255));
-
-		btnNewButton.setBounds(326, 211, 147, 40);
+		btnNewButton.setBounds(240, 211, 147, 40);
 		frame.getContentPane().add(btnNewButton);
 
+		btnActu = new JButton("Actualiser");
+		btnActu.setBackground(new Color(0, 153, 255));
+		btnActu.setBounds(420, 211, 147, 40);
+		frame.getContentPane().add(btnActu);
+		
 		JLabel lblMesFichiers = new JLabel("Mes fichiers");
 		lblMesFichiers.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblMesFichiers.setBounds(341, 12, 123, 25);
@@ -133,11 +130,21 @@ public class TestWIndowBuilder {
 		frame.repaint();
 	}
 	
-	private void majFiles() {
+	public void majFiles() {
 		File directory = new File("files/");
 		File[] tabFiles=directory.listFiles();
+		files.clear();
 		for(int i=0 ; i<tabFiles.length ; i++) {
 			files.add(tabFiles[i].getName());
 		}
+		list_1.setModel(new AbstractListModel() {
+			public int getSize() {
+				return files.size();
+			}
+
+			public Object getElementAt(int index) {
+				return files.get(index);
+			}
+		});
 	}
 }
