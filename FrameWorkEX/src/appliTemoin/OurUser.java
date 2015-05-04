@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import user.UserSync;
 
@@ -21,15 +22,19 @@ public class OurUser extends UserSync {
 
 	TestWIndowBuilder windows;
 	_Message message;
+	String ipServer;
+	int port;
 
-	public OurUser(String ipServer, int port) throws RemoteException {
+	public OurUser() throws RemoteException {
 		super();
 		initialize();
-		
-		this.uName = JOptionPane.showInputDialog("Entrez votre nom d'utilisateur");
 		importServer(ipServer,port);
+		
+		while(!server.registerUser(uName, this)) {
+			//JOptionPane.showMessageDialog(null, "Pseudo non disponible, prends en un autre mec !");
+			this.uName = JOptionPane.showInputDialog(null, "Pseudo non disponible\nChoisissez un nouveau pseudo : ");
+		}
 		windows.frame.setTitle(uName);
-		server.registerUser(uName, this);
 	}
 
 	@Override
@@ -97,6 +102,25 @@ public class OurUser extends UserSync {
 	}
 	
 	private void initialize() {
+		
+		JTextField pseudo = new JTextField();
+		JTextField ip = new JTextField();
+		JTextField port = new JTextField();
+		Object[] options = {
+				"Pseudo:", pseudo,
+				"Adresse IP:", ip,
+				"Port:", port
+		};
+
+		int option = JOptionPane.showConfirmDialog(null, options, "Login", JOptionPane.OK_CANCEL_OPTION);
+		if (option == JOptionPane.OK_OPTION) {
+			this.ipServer = ip.getText();
+			this.port = Integer.parseInt(port.getText());
+			this.uName = pseudo.getText();
+		} else {
+		    System.out.println("Login canceled");
+		}
+		
 		windows = new TestWIndowBuilder();
 		
 		windows.frame.addWindowListener(new WindowAdapter()

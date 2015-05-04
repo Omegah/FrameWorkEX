@@ -68,19 +68,24 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync{
 	 * Register user in the user list
 	 * @param name Name of the user to register
 	 * @param newUser Instance of the user to register
+	 * @return Vrai si l'ajout est réalisé, faux si le nom d'utilisateur est déjà utilisé
 	 */
-	public void registerUser(String name, _UserSync newUser) throws RemoteException {
-		users.put(name, newUser);
-		listUsers.add(name);
-		eUsers = users.elements();
-		while (eUsers.hasMoreElements()) {
-			_UserSync user = ((_UserSync) eUsers.nextElement());
-			try {
-				user.setOnlineusers(getActiveUsers());
-			} catch (RemoteException e) {
-				e.printStackTrace();
+	public boolean registerUser(String name, _UserSync newUser) throws RemoteException {
+		if(!users.containsKey(name)) {
+			users.put(name, newUser);
+			listUsers.add(name);
+			eUsers = users.elements();
+			while (eUsers.hasMoreElements()) {
+				_UserSync user = ((_UserSync) eUsers.nextElement());
+				try {
+					user.setOnlineusers(getActiveUsers());
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 			}
+			return true;
 		}
+		else return false;
 		
 		
 	}
