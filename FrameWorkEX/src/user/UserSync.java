@@ -23,32 +23,32 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 	}
 	
 	/**
-	 * Implement how the represent the user list one the user interface
-	 * @param activeUsers ArrayList of users.
+	 * Définir comment mettre à jour la liste des utilisateurs connectés (ex:interface graphique)
+	 * @param activeUsers La liste des utilisateurs connectés
 	 */
 	public abstract void majUser(ArrayList<String> activeUsers) throws RemoteException ;
 
 	/**
-	 * Implement how to treat the received object.
-	 * @param name Name of the user who send the Object
-	 * @param obj Object sent
+	 * Définir comment traiter l'objet reçu.
+	 * @param name Le nom de l'expéditeur de l'objet
+	 * @param obj L'objet envoyé
 	 */
 	public abstract void execute(String name, Object obj) throws RemoteException ;
 	
 
 	/**
-	 * Get an object from the server (used on the server with RMI).
-	 * @param name Name of the user who send the Object
-	 * @param obj Object sent
+	 * Recevoir un objet depuis le serveur (utilisé depuis le serveur par RMI).
+	 * @param name Le nom de l'expéditeur de l'objet
+	 * @param obj L'objet envoyé
 	 */
 	public synchronized void receiveObject(String name, Object obj)throws RemoteException {
 		execute(name, obj);
 	}
 
 	/**
-	 * Initialize the connection with a server
-	 * @param ip Ip address of the server
-	 * @param port Port number to connect
+	 * Initialisation de la connexion avec un serveur
+	 * @param ip L'adresse IP du serveur
+	 * @param port Le numero de port de la connexion
 	 */
 	public void importServer(String ip, int port) throws RemoteException{
 				try {
@@ -59,7 +59,8 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 	}
 
 	/**
-	 * TODO : Completer
+	 * Envoyer un objet sur le serveur (pour diffusion aux autres utilisateurs).
+	 * @param obj L'objet à envoyer
 	 */
 	public void send(Object obj) throws RemoteException {
 		try {
@@ -70,16 +71,16 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 	}
 
 	/**
-	 * Get the user name.
-	 * @return The username.
+	 * Obtenir le nom d'utilisateur.
+	 * @return Le nom de l'utilisateur
 	 */
 	public String getuName() throws RemoteException {
 		return uName;
 	}
 	
 	/**
-	 * Update the user list, used by a server with RMI
-	 * @param activeUsers ArrayList of users connected on the server
+	 * Mettre à jour la liste des utilisateurs connectés (utilisé depuis le serveur avec RMI).
+	 * @param activeUsers La liste des utilisateurs connectés
 	 */
 	public synchronized void setOnlineusers(ArrayList<String> activeUsers) throws RemoteException{
 		majUser(activeUsers);
