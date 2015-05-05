@@ -17,7 +17,6 @@ import java.util.Hashtable;
 import javax.swing.AbstractListModel;
 
 public class PrototypeFrame {
-	PrototypeFrame windows;
 	JFrame frame;
 	protected JTextField textField;
 	private ArrayList<String> activeUsers;
