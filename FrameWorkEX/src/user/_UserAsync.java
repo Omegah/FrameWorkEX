@@ -5,17 +5,18 @@ import java.util.ArrayList;
 
 public interface _UserAsync extends _User {
 	/**
-	 * TODO : A compléter
-	 * @param name
-	 * @return
+	 * Récupérer un objet depuis le serveur
+	 * @param name Nom de l'objet à récupérer
+	 * @return L'objet récupéré
 	 * @throws RemoteException
+	 * @require !name.isEmpty()
 	 */
 	public abstract Object takeObject(String name)throws RemoteException;
 	
 	/**
-	 * TODO : A compléter
-	 * @param obj
-	 * @param name
+	 * Envoi d'un objet sur le serveur
+	 * @param obj L'objet à envoyer
+	 * @param name Le nom de l'objet
 	 * @throws RemoteException
 	 */
 	public void send(Object obj, String name) throws RemoteException;

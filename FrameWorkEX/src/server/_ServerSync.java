@@ -19,6 +19,7 @@ public interface _ServerSync extends _Server {
 	 * Suppression d'un utilisateur de la liste des utilisateurs connectés au serveur
 	 * @param name Le nom de l'utilisateur à supprimer
 	 * @throws RemoteException
+	 * @require getActiveUsers.size()>0 && users.containsKey(name)
 	 */
 	public void removeUser(String name) throws RemoteException;
 	
@@ -33,7 +34,7 @@ public interface _ServerSync extends _Server {
 	 * Envoie d'un objet sur le serveur
 	 * @param name Le nom de l'objet
 	 * @param obj L'objet à envoyer
-	 * @throws RemoteException
+	 * @require !name.isEmpty()
 	 */
 	public void send(String name, Object obj) throws RemoteException;
 	

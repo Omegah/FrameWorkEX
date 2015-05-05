@@ -27,6 +27,7 @@ public interface _User extends Remote {
 	 * @param ip L'adresse IP du serveur
 	 * @param port Le numéro du port pour la connexion
 	 * @throws RemoteException
+	 * @require !ip.isEmpty() && port >1000 && port < 65535
 	 */
 	public void importServer(String ip, int port) throws RemoteException;
 	

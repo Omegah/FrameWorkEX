@@ -33,7 +33,7 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 		uName = name;
 	}
 	
-	public UserSync() throws RemoteException{
+	protected UserSync() throws RemoteException{
 	}
 	
 	/**
@@ -63,6 +63,7 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 	 * Initialisation de la connexion avec un serveur
 	 * @param ip L'adresse IP du serveur
 	 * @param port Le numero de port de la connexion
+	 * @require !ip.isEmpty() && port >1000 && port < 65535
 	 */
 	public void importServer(String ip, int port) throws RemoteException{
 				try {

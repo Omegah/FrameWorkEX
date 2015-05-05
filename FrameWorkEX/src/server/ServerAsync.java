@@ -26,12 +26,13 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 
 
 	/**
-	 * TODO : A completer
+	 * Envoi d'un objet sur le serveur
+	 * @param obj L'objet à envoyer
+	 * @param name Le nom de l'objet
 	 */
 	public void send(Object obj, String name) throws RemoteException{
 		try {
 			BufferedOutputStream output = new BufferedOutputStream(
-
 					new FileOutputStream("filesServer/" + name));
 			output.write(((byte[])obj), 0, ((byte[])obj).length);
 			output.flush();
@@ -43,7 +44,9 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 	}
 
 	/**
-	 * TODO : A completer
+	 * Récupération d'un objet depuis le serveur
+	 * @param name Le nom de l'objet à récupérer
+	 * @require !name.isEmpty()
 	 */
 	public Object takeObject(String name) throws RemoteException{
 		try {
@@ -64,7 +67,7 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 	 * Création du serveur
 	 * @param IP Adresse IP du serveur
 	 * @param Port Numéro de port pour la connexion
-	 * @ensure Port > 1000 && Port <65535
+	 * @require Port > 1000 && Port <65535
 	 */
 	public void createServer(String Ip, int Port) throws RemoteException {
 		try {

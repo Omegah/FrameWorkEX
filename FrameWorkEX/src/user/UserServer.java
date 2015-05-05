@@ -34,13 +34,14 @@ public class UserServer extends UserAsync implements _ServerAsync {
 	 * Création du serveur
 	 * @param Ip Adresse IP du serveur
 	 * @param Port Numéro de port pour la connexion
+	 * @require !ip.isEmpty() && port >1000 && port < 65535
 	 */
-	public void createServer(String Ip, int Port) throws RemoteException {
+	public void createServer(String ip, int port) throws RemoteException {
 		try {
 
-			LocateRegistry.createRegistry(Port);
+			LocateRegistry.createRegistry(port);
 			try {
-				Naming.rebind("rmi://" + Ip + "/Chat", this);
+				Naming.rebind("rmi://" + ip + "/Chat", this);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
@@ -69,6 +70,7 @@ public class UserServer extends UserAsync implements _ServerAsync {
 	/**
 	 * Récuperer un objet sur le serveur
 	 * @param name Le nom de l'objet à télécharger
+	 * @require !name.isEmpty()
 	 */
 	public Object getObject(String name) throws RemoteException {
 		try {

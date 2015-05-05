@@ -11,7 +11,6 @@ public class OurUserAsync extends UserAsync {
 
 	protected OurUserAsync() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -37,7 +36,6 @@ public class OurUserAsync extends UserAsync {
 
 	@Override
 	public void send(Object obj) throws RemoteException {
-		// TODO Auto-generated method stub
 		
 	}
 
