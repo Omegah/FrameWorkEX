@@ -28,17 +28,18 @@ public class OurUser extends UserSync {
 	public OurUser() throws RemoteException {
 		super();
 		initialize();
-		importServer(ipServer,port);
-		
-		while(!server.registerUser(uName, this)) {
-			this.uName = JOptionPane.showInputDialog(null, "Pseudo non disponible\nChoisissez un nouveau pseudo : ");
+		importServer(ipServer, port);
+
+		while (!server.registerUser(uName, this)) {
+			this.uName = JOptionPane.showInputDialog(null,
+					"Pseudo non disponible\nChoisissez un nouveau pseudo : ");
 		}
 		windows.frame.setTitle(uName);
 	}
 
 	@Override
 	public void execute(String filename, Object obj) {
-		if(obj instanceof _Message){
+		if (obj instanceof _Message) {
 			message = ((_Message) obj);
 			try {
 				windows.txtarea.append(message.getMessageHeure() + "\n");
@@ -52,13 +53,15 @@ public class OurUser extends UserSync {
 			try {
 				BufferedOutputStream output = new BufferedOutputStream(
 
-						new FileOutputStream("files/" + filename));
-				output.write(((byte[])obj), 0, ((byte[])obj).length);
+				new FileOutputStream("files/" + filename));
+				output.write(((byte[]) obj), 0, ((byte[]) obj).length);
 				output.flush();
 				output.close();
 
-				windows.txtarea.append("Partage du fichier \"" + filename + "\"\n");
-				windows.txtarea.setCaretPosition(windows.txtarea.getDocument().getLength());
+				windows.txtarea.append("Partage du fichier \"" + filename
+						+ "\"\n");
+				windows.txtarea.setCaretPosition(windows.txtarea.getDocument()
+						.getLength());
 				windows.frame.repaint();
 
 			} catch (IOException e) {
@@ -69,17 +72,29 @@ public class OurUser extends UserSync {
 	}
 
 	public void send(String uName, Object obj) throws RemoteException {
-		if (obj instanceof Message && ((Message) obj).getMessage().charAt(0) == '/') {
-			String parts[] = ((Message) obj).getMessage().split(" ");
-			String destinataire = parts[0];
-			destinataire = destinataire.substring(1, destinataire.length());
-			String m = "**";
-
-			for (int i = 1; i < parts.length; i++)
-				m = m +" "+ parts[i];
-			((Message) obj).setMessage(m + " **");
-			sendWhisp(obj, destinataire);
-		} else {
+		
+		if(obj instanceof Message && !((Message)obj).getMessage().equals(""))
+			{
+				if (((Message) obj).getMessage().charAt(0) == '/') {
+					String parts[] = ((Message) obj).getMessage().split(" ");
+					String destinataire = parts[0];
+					destinataire = destinataire.substring(1, destinataire.length());
+					String m = "**";
+		
+					for (int i = 1; i < parts.length; i++)
+						m = m +" "+ parts[i];
+					((Message) obj).setMessage(m + " **");
+					sendWhisp(obj, destinataire);
+				}
+				else {
+					try {
+						server.send(uName, obj);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		else {
 			try {
 				server.send(uName, obj);
 			} catch (RemoteException e) {
@@ -120,8 +135,9 @@ public class OurUser extends UserSync {
 
 		JTextField pseudo = new JTextField();
 		JTextField ip = new JTextField();
-		JTextField port = new JTextField();
-		Object[] options = { "Pseudo:", pseudo, "Adresse IP:", ip, "Port:",port };
+		JTextField port = new JTextField("1099");
+		Object[] options = { "Pseudo:", pseudo, "Adresse IP:", ip, "Port:",
+				port };
 
 		int option = JOptionPane.showConfirmDialog(null, options, "Login",
 				JOptionPane.OK_CANCEL_OPTION);
@@ -176,7 +192,7 @@ public class OurUser extends UserSync {
 				}
 			}
 		});
-		
+
 		windows.btnActu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				windows.majFiles();
@@ -187,7 +203,9 @@ public class OurUser extends UserSync {
 		windows.btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					server.send(windows.list_1.getSelectedValue().toString(), downloadFile(windows.list_1.getSelectedValue().toString()));
+					server.send(windows.list_1.getSelectedValue().toString(),
+							downloadFile(windows.list_1.getSelectedValue()
+									.toString()));
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}

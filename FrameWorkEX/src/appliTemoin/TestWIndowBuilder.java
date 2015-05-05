@@ -83,11 +83,11 @@ public class TestWIndowBuilder {
 		frame.getContentPane().add(list_1);
 		btnNewButton = new JButton("Envoyer");
 		btnNewButton.setBackground(new Color(0, 153, 255));
-		btnNewButton.setBounds(240, 211, 147, 40);
+		btnNewButton.setBounds(418, 211, 147, 40);
 		frame.getContentPane().add(btnNewButton);
 		btnActu = new JButton("Actualiser");
 		btnActu.setBackground(new Color(0, 153, 255));
-		btnActu.setBounds(420, 211, 147, 40);
+		btnActu.setBounds(247, 211, 147, 40);
 		frame.getContentPane().add(btnActu);
 		JLabel lblMesFichiers = new JLabel("Mes fichiers");
 		lblMesFichiers.setFont(new Font("Dialog", Font.BOLD, 15));
