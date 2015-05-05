@@ -17,16 +17,11 @@ protected UserAsync() throws RemoteException {
 	}
 
 protected _ServerAsync server;
-	@Override
-	public abstract void receiveObject(String name, Object obj) throws RemoteException;
 	
-	@Override
-	public void execute(String name, Object obj) throws RemoteException {
-		// TODO Auto-generated method stub
+	
+	public abstract void execute(String name, Object obj) throws RemoteException;
 
-	}
-
-	@Override
+	
 	public void importServer(String ip, int port) throws RemoteException {
 		try {
 			server = (_ServerAsync) Naming.lookup("rmi://" + ip + "/Chat");
@@ -38,9 +33,8 @@ protected _ServerAsync server;
 		
 	}
 	
-	@Override
-	public void send(Object obj) throws RemoteException {
-		server.sendObject(obj);
+	public void send(Object obj, String name) throws RemoteException {
+		server.sendObject(obj, name);
 	}
 
 }

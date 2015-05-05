@@ -24,12 +24,9 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 	}
 
 	/**
-	 * Start the server on a port number and initialization of the user list.
-	 * 
-	 * @param Ip
-	 *            Ip adress of the server
-	 * @param Port
-	 *            Port number to create the connection
+	 * Création d'un serveur et initialisation de la liste d'utilisateurs
+	 * @param Ip Adresse IP du serveur
+	 * @param Port Numéro du port pour créer la connexion
 	 */
 	public void createServer(String Ip, int Port) throws RemoteException {
 		IpServer = Ip;
@@ -45,12 +42,9 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 	}
 
 	/**
-	 * Send an object to each user connected on the server.
-	 * 
-	 * @param name
-	 *            Name of the user who send the object
-	 * @param obj
-	 *            Object to send
+	 * Envoyer un objet aux utilisateurs connectés au serveur
+	 * @param name Nom de l'expéditeur
+	 * @param obj Objet a envoyer
 	 */
 	public void send(String name, Object obj) throws RemoteException {
 		eUsers = users.elements();
@@ -59,7 +53,6 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 			try {
 				user.receiveObject(name, obj);
 			} catch (RemoteException ex) {
-				// ex.printStackTrace();
 				try {
 					System.out.println("Remove " + user.getuName());
 					removeUser(user.getuName());
@@ -71,14 +64,10 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 	}
 
 	/**
-	 * Register user in the user list
-	 * 
-	 * @param name
-	 *            Name of the user to register
-	 * @param newUser
-	 *            Instance of the user to register
-	 * @return Vrai si l'ajout est réalisé, faux si le nom d'utilisateur est
-	 *         déjà utilisé
+	 * Ajout d'un utilisateur à la liste des utilisateurs
+	 * @param name Nom de l'utilisateur à ajouter
+	 * @param newUser Instance de l'utilisateur
+	 * @return Vrai si l'ajout est réalisé, faux si le nom d'utilisateur est déjà utilisé
 	 */
 	public boolean registerUser(String name, _UserSync newUser)
 			throws RemoteException {
@@ -101,10 +90,8 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 	}
 
 	/**
-	 * Remove a user in the user list.
-	 * 
-	 * @param name
-	 *            The name of the user to remove
+	 * Suppression d'un utilisateur de la liste des utilisateurs
+	 * @param name Nom de l'utilisateur à supprimer
 	 */
 	public void removeUser(String name) throws RemoteException {
 		users.remove(name);
@@ -122,22 +109,26 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 	}
 
 	/**
-	 * Get list of users.
-	 * 
-	 * @return ArrayList of users (String)
+	 * Obtenir la liste des utilisateurs connectés
+	 * @return La liste des utilisateurs
 	 */
 	public ArrayList<String> getActiveUsers() throws RemoteException {
 		return listUsers;
 	}
 
-	@Override
-	public void privateSend(String name, String name2, Object obj) throws RemoteException {
+	/**
+	 * Envoie d'un objet en privé à un utilisateur
+	 * @param senderName Nom de l'expéditeur
+	 * @param receiverName Nom du récepteur
+	 * @param obj Objet à envoyer
+	 */
+	public void privateSend(String senderName, String receiverName, Object obj) throws RemoteException {
 		eUsers = users.elements();
 		while (eUsers.hasMoreElements()) {
 			_UserSync user = ((_UserSync) eUsers.nextElement());
 			try {
-				if ((user.getuName().equals(name))|| (user.getuName().equals(name2))) {
-					user.receiveObject(name, obj);
+				if ((user.getuName().equals(senderName))|| (user.getuName().equals(receiverName))) {
+					user.receiveObject(senderName, obj);
 				}
 			} catch (RemoteException ex) {
 				try {
