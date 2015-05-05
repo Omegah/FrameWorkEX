@@ -11,6 +11,11 @@ import java.util.Hashtable;
 
 import user._UserSync;
 
+/**
+ * Classe ServerSync
+ * Instanciation d'un serveur pour une communication synchrone multi-utilisateurs
+ * @author Groupe 3
+ */
 public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 
 	private static final long serialVersionUID = 1L;

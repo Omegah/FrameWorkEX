@@ -12,16 +12,32 @@ import java.rmi.server.UnicastRemoteObject;
 
 import server._ServerAsync;
 
+/**
+ * Classe abstraite UserAsync
+ * Instanciation d'un utilisateur pour un serveur asynchrone (ex: dépôt de fichiers)
+ * La méthode abstraite à implémenter concerne le traitement des fichiers récupérés
+ * 
+ * @author Groupe 3
+ */
 public abstract class UserAsync extends UnicastRemoteObject implements _UserAsync {
+	public _ServerAsync server;
+	
 	public UserAsync() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-	public _ServerAsync server;
-
+	
+	/**
+	 * Implémentation du traitement d'un fichier récupéré
+	 * @param name Le nom du fichier
+	 * @param obj L'objet à traiter
+	 */
 	public abstract void execute(String name, Object obj) throws RemoteException;
 
+	/**
+	 * Création de la connexion avec un serveur
+	 * @param ip Adresse IP du serveur
+	 * @param port Numéro de port pour la connexion
+	 */
 	public void importServer(String ip, int port) throws RemoteException {
 		try {
 			server = (_ServerAsync) Naming.lookup("rmi://" + ip + "/Chat");
@@ -32,11 +48,20 @@ public abstract class UserAsync extends UnicastRemoteObject implements _UserAsyn
 		}
 
 	}
-
+	
+	/**
+	 * Envoie d'un objet sur le serveur
+	 * @param obj L'objet à déposer
+	 * @param name Le nom de l'objet
+	 */
 	public void send(Object obj, String name) throws RemoteException {
-		server.sendObject(obj, name);
+		server.send(obj, name);
 	}
 	
+	/**
+	 * Récupération d'un objet sur le serveur
+	 * @param name Le nom de l'objet à récupérer
+	 */
 	public Object takeObject(String name) throws RemoteException{
 		try {
 			File file = new File("files/" + name);

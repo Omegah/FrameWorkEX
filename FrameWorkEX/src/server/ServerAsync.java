@@ -12,6 +12,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * Classe ServerAsync
+ * Instanciation d'un serveur pour une communication asynchrone multi-utilisateurs
+ * @author Groupe 3
+ */
 public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 
 
@@ -20,7 +25,10 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 	}
 
 
-	public void sendObject(Object obj, String name) throws RemoteException{
+	/**
+	 * TODO : A completer
+	 */
+	public void send(Object obj, String name) throws RemoteException{
 		try {
 			BufferedOutputStream output = new BufferedOutputStream(
 
@@ -34,7 +42,9 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 		}
 	}
 
-
+	/**
+	 * TODO : A completer
+	 */
 	public Object takeObject(String name) throws RemoteException{
 		try {
 			File file = new File("filesServer/" + name);
@@ -49,10 +59,13 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 		}
 	}
 
-		/**
-	    *@ invariant
-	    *@ ensures Port > 1000 && Port < 655535;
-		*/
+	
+	/**
+	 * Création du serveur
+	 * @param IP Adresse IP du serveur
+	 * @param Port Numéro de port pour la connexion
+	 * @ensure Port > 1000 && Port <65535
+	 */
 	public void createServer(String Ip, int Port) throws RemoteException {
 		try {
 
@@ -60,11 +73,9 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 			try {
 				Naming.rebind("rmi://" + Ip + "/Chat", this);
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

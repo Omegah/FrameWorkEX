@@ -18,6 +18,11 @@ import javax.swing.JTextField;
 
 import user.UserSync;
 
+/**
+ * Classe concrète : Implémentation de la classe UserSync pour l'application témoin
+ * @author Groupe 3
+ *
+ */
 public class OurUser extends UserSync {
 
 	TestWIndowBuilder windows;
@@ -72,29 +77,26 @@ public class OurUser extends UserSync {
 	}
 
 	public void send(String uName, Object obj) throws RemoteException {
-		
-		if(obj instanceof Message && !((Message)obj).getMessage().equals(""))
-			{
-				if (((Message) obj).getMessage().charAt(0) == '/') {
-					String parts[] = ((Message) obj).getMessage().split(" ");
-					String destinataire = parts[0];
-					destinataire = destinataire.substring(1, destinataire.length());
-					String m = "**";
-		
-					for (int i = 1; i < parts.length; i++)
-						m = m +" "+ parts[i];
-					((Message) obj).setMessage(m + " **");
-					sendWhisp(obj, destinataire);
-				}
-				else {
-					try {
-						server.send(uName, obj);
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					}
+
+		if (obj instanceof Message && !((Message) obj).getMessage().equals("")) {
+			if (((Message) obj).getMessage().charAt(0) == '/') {
+				String parts[] = ((Message) obj).getMessage().split(" ");
+				String destinataire = parts[0];
+				destinataire = destinataire.substring(1, destinataire.length());
+				String m = "**";
+
+				for (int i = 1; i < parts.length; i++)
+					m = m + " " + parts[i];
+				((Message) obj).setMessage(m + " **");
+				sendWhisp(obj, destinataire);
+			} else {
+				try {
+					server.send(uName, obj);
+				} catch (RemoteException e) {
+					e.printStackTrace();
 				}
 			}
-		else {
+		} else {
 			try {
 				server.send(uName, obj);
 			} catch (RemoteException e) {
@@ -112,8 +114,8 @@ public class OurUser extends UserSync {
 		}
 	}
 
-	public void majUser(ArrayList<String> activeUsers) {
-		windows.majUsers(activeUsers);
+	public void updateUser(ArrayList<String> activeUsers) {
+		windows.updateUsers(activeUsers);
 	}
 
 	public synchronized byte[] downloadFile(String fileName) {

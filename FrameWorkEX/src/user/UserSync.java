@@ -10,11 +10,25 @@ import java.util.ArrayList;
 import server._Server;
 import server._ServerSync;
 
+/**
+ * Classe abstraite UserSync
+ * 
+ * Utilisateur d'un serveur synchrone (ex: Chat)
+ * La connexion avec le serveur se fait à l'aide de la méthode importServer
+ * Les implémentations à réaliser concernent le traitement des objets envoyés
+ * et la gestion des utilisateurs (liste)
+ * 
+ * @author Groupe 3
+ */
 public abstract class UserSync extends UnicastRemoteObject implements _UserSync {
 	protected _ServerSync server;
 	protected String uName;
 
-	
+	/**
+	 * Constructeur de la classe
+	 * @param name Nom de l'utilisateur
+	 * @throws RemoteException
+	 */
 	public UserSync(String name) throws RemoteException{
 		uName = name;
 	}
@@ -26,7 +40,7 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 	 * Définir comment mettre à jour la liste des utilisateurs connectés (ex:interface graphique)
 	 * @param activeUsers La liste des utilisateurs connectés
 	 */
-	public abstract void majUser(ArrayList<String> activeUsers) throws RemoteException ;
+	public abstract void updateUser(ArrayList<String> activeUsers) throws RemoteException ;
 
 	/**
 	 * Définir comment traiter l'objet reçu.
@@ -83,7 +97,7 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 	 * @param activeUsers La liste des utilisateurs connectés
 	 */
 	public synchronized void setOnlineusers(ArrayList<String> activeUsers) throws RemoteException{
-		majUser(activeUsers);
+		updateUser(activeUsers);
 	}
 
 }

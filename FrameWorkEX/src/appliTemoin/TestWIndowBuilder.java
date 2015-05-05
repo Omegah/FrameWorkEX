@@ -102,7 +102,7 @@ public class TestWIndowBuilder {
 	 * mets a jours la liste des utilisateurs 
 	 */
 
-	public void majUsers(ArrayList<String> a) {
+	public void updateUsers(ArrayList<String> a) {
 		values = a;
 		list.removeAll();
 		list.setModel(new AbstractListModel() {
