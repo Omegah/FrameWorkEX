@@ -147,6 +147,7 @@ public class OurUser extends UserSync {
 			this.uName = pseudo.getText();
 		} else {
 			System.out.println("Login canceled");
+			System.exit(0);
 		}
 
 		windows = new TestWIndowBuilder();
