@@ -1,8 +1,10 @@
 package server;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -15,13 +17,24 @@ public abstract class ServerAsync extends UnicastRemoteObject implements _Server
 
 	protected ServerAsync() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public abstract void sendObject(Object obj) throws RemoteException;
 
-	@Override
+	public void sendObject(Object obj, String name) throws RemoteException{
+		try {
+			BufferedOutputStream output = new BufferedOutputStream(
+
+					new FileOutputStream("files/" + name));
+			output.write(((byte[])obj), 0, ((byte[])obj).length);
+			output.flush();
+			output.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	public Object takeObject(String name) throws RemoteException{
 		try {
 			File file = new File("files/" + name);
@@ -37,7 +50,7 @@ public abstract class ServerAsync extends UnicastRemoteObject implements _Server
 		}
 	}
 
-	@Override
+
 	public void createServer(String Ip, int Port) throws RemoteException {
 		try {
 
