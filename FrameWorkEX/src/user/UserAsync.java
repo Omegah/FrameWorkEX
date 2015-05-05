@@ -40,7 +40,7 @@ protected _ServerAsync server;
 	
 	@Override
 	public void send(Object obj) throws RemoteException {
-		server.takeObject(obj);
+		server.sendObject(obj);
 	}
 
 }

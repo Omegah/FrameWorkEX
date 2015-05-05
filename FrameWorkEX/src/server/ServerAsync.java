@@ -1,5 +1,9 @@
 package server;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -15,10 +19,23 @@ public abstract class ServerAsync extends UnicastRemoteObject implements _Server
 	}
 
 	@Override
-	public abstract void takeObject(Object obj) throws RemoteException ;
+	public abstract void sendObject(Object obj) throws RemoteException;
 
 	@Override
-	public abstract Object sendObject(String name) throws RemoteException ;
+	public Object takeObject(String name) throws RemoteException{
+		try {
+			File file = new File("files/" + name);
+			byte buffer[] = new byte[(int) file.length()];
+			BufferedInputStream input = new BufferedInputStream(
+					new FileInputStream("files/" + name));
+			input.read(buffer, 0, buffer.length);
+			input.close();
+			return buffer;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	@Override
 	public void createServer(String Ip, int Port) throws RemoteException {

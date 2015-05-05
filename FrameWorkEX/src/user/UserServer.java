@@ -32,10 +32,10 @@ public abstract class UserServer extends UserAsync implements _ServerAsync{
 	}
 
 	@Override
-	public abstract void takeObject(Object obj) throws RemoteException ;
+	public abstract void sendObject(Object obj) throws RemoteException ;
 
 	@Override
-	public abstract Object sendObject(String name) throws RemoteException;
+	public abstract Object takeObject(String name) throws RemoteException;
 
 	@Override
 	public abstract void receiveObject(String name, Object obj) throws RemoteException;
