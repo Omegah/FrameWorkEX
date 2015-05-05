@@ -11,6 +11,12 @@ public class Message extends UnicastRemoteObject implements _Message {
     private String expediteur;
     private Calendar heure;
 
+	/**
+	 * Constructeur de Message
+	 * 
+	 * @param expediteur    Expediteur du message
+	 * @param message 		Texte du message
+	 */
     public Message(String expediteur, String message)throws RemoteException
     {
     	this.expediteur = expediteur;
@@ -19,10 +25,7 @@ public class Message extends UnicastRemoteObject implements _Message {
     }
     
     public Message()throws RemoteException {
-    	
-    	this.expediteur = "toast";
-    	this.message="this is the test maggle";
-        this.heure = Calendar.getInstance();
+
     }
     
     public String getMessage()
