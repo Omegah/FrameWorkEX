@@ -54,10 +54,12 @@ public class TestWIndowBuilder {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		files = new ArrayList<String>();
+		
 		list = new JList();
-		list.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		list.setBounds(25, 45, 167, 206);
-		frame.getContentPane().add(list);
+		JScrollPane scrolllist = new JScrollPane(list);
+		scrolllist.setBounds(25, 45, 167, 206);
+		frame.getContentPane().add(scrolllist);
+		
 		txtarea = new JTextArea();
 		txtarea.setText("");
 		txtarea.setEditable(false);
@@ -77,17 +79,17 @@ public class TestWIndowBuilder {
 		lblUtilisateursConnects.setBounds(24, 15, 191, 19);
 		frame.getContentPane().add(lblUtilisateursConnects);
 		list_1 = new JList();
-		list_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		list_1.setBounds(237, 45, 333, 154);
+		JScrollPane scrolllist_1 = new JScrollPane(list_1);
+		scrolllist_1.setBounds(237, 45, 333, 154);
+		frame.getContentPane().add(scrolllist_1);
 		majFiles();
-		frame.getContentPane().add(list_1);
 		btnNewButton = new JButton("Envoyer");
 		btnNewButton.setBackground(new Color(0, 153, 255));
-		btnNewButton.setBounds(240, 211, 147, 40);
+		btnNewButton.setBounds(418, 211, 147, 40);
 		frame.getContentPane().add(btnNewButton);
 		btnActu = new JButton("Actualiser");
 		btnActu.setBackground(new Color(0, 153, 255));
-		btnActu.setBounds(420, 211, 147, 40);
+		btnActu.setBounds(247, 211, 147, 40);
 		frame.getContentPane().add(btnActu);
 		JLabel lblMesFichiers = new JLabel("Mes fichiers");
 		lblMesFichiers.setFont(new Font("Dialog", Font.BOLD, 15));
