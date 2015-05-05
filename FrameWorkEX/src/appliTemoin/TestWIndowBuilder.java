@@ -39,14 +39,14 @@ public class TestWIndowBuilder {
 	protected JList list_1;
 
 	/**
-	 * Create the application.
+	 * Crée l'application
 	 */
 	public TestWIndowBuilder() {
 		initialize();
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialise le contenu de la Frame
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -95,6 +95,10 @@ public class TestWIndowBuilder {
 		frame.getContentPane().add(lblMesFichiers);
 		frame.setVisible(true);
 	}
+	
+	/**
+	 * mets a jours la liste des utilisateurs 
+	 */
 
 	public void majUsers(ArrayList<String> a) {
 		values = a;
@@ -111,6 +115,10 @@ public class TestWIndowBuilder {
 		frame.repaint();
 	}
 
+	/**
+	 * mets a jour la liste des fichiers 
+	 */
+	
 	public void majFiles() {
 		File directory = new File("files/");
 		File[] tabFiles = directory.listFiles();
