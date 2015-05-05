@@ -25,7 +25,7 @@ import user.UserSync;
  */
 public class OurUser extends UserSync {
 
-	TestWIndowBuilder windows;
+	PrototypeFrame windows;
 	_Message message;
 	String ipServer;
 	int port;
@@ -152,7 +152,7 @@ public class OurUser extends UserSync {
 			System.exit(0);
 		}
 
-		windows = new TestWIndowBuilder();
+		windows = new PrototypeFrame();
 
 		windows.frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {

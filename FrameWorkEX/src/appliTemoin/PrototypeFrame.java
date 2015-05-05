@@ -24,8 +24,8 @@ import java.util.Hashtable;
 import javax.swing.AbstractListModel;
 import server.ServerSync;
 
-public class TestWIndowBuilder {
-	TestWIndowBuilder windows;
+public class PrototypeFrame {
+	PrototypeFrame windows;
 	JFrame frame;
 	protected JTextField textField;
 	private ArrayList<String> values;
@@ -41,7 +41,7 @@ public class TestWIndowBuilder {
 	/**
 	 * Crée l'application
 	 */
-	public TestWIndowBuilder() {
+	public PrototypeFrame() {
 		initialize();
 	}
 
