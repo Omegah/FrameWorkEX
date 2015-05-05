@@ -65,7 +65,7 @@ public abstract class UserAsync extends UnicastRemoteObject implements _UserAsyn
 	 * @param name Le nom de l'objet à récupérer
 	 * @require !name.isEmpty()
 	 */
-	public Object takeObject(String name) throws RemoteException{
+	public Object getObject(String name) throws RemoteException{
 		try {
 			File file = new File("files/" + name);
 			byte buffer[] = new byte[(int) file.length()];

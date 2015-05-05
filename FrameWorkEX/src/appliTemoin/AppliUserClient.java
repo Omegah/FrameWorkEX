@@ -22,13 +22,13 @@ public class AppliUserClient {
 			case 2:
 				System.out.println("Fichier à envoyer : ");
 				String name = sc.nextLine();
-				user.send(user.takeObject(name),name );
+				user.send(user.getObject(name),name );
 				break;
 
 			case 3:
 				System.out.println("Fichier à recuperer : ");
 				String name2 = sc.nextLine();
-				user.receiveObject(name2,user.server.takeObject(name2));
+				user.receiveObject(name2,user.server.getObject(name2));
 				break;
 			}
 

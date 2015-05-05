@@ -19,5 +19,5 @@ public interface _ServerAsync extends _Server {
 	 * @return L'objet récupéré
 	 * @throws RemoteException
 	 */
-	public Object takeObject(String name) throws RemoteException;
+	public Object getObject(String name) throws RemoteException;
 }

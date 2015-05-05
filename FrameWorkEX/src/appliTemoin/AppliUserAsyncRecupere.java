@@ -13,7 +13,7 @@ public class AppliUserAsyncRecupere {
 		do{
 		System.out.println("Fichier à recuperer : ");
 		String name = sc.nextLine();
-		user.receiveObject(name,user.server.takeObject(name));
+		user.receiveObject(name,user.server.getObject(name));
 		}while(true);
 	}
 }

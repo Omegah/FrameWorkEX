@@ -47,11 +47,11 @@ public class OurUser extends UserSync {
 		if (obj instanceof _Message) {
 			message = ((_Message) obj);
 			try {
-				windows.txtarea.append(message.getMessageHeure() + "\n");
+				windows.textArea.append(message.getMessageHeure() + "\n");
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-			windows.txtarea.setCaretPosition(windows.txtarea.getDocument()
+			windows.textArea.setCaretPosition(windows.textArea.getDocument()
 					.getLength());
 			windows.frame.repaint();
 		} else {
@@ -63,9 +63,9 @@ public class OurUser extends UserSync {
 				output.flush();
 				output.close();
 
-				windows.txtarea.append("Partage du fichier \"" + filename
+				windows.textArea.append("Partage du fichier \"" + filename
 						+ "\"\n");
-				windows.txtarea.setCaretPosition(windows.txtarea.getDocument()
+				windows.textArea.setCaretPosition(windows.textArea.getDocument()
 						.getLength());
 				windows.frame.repaint();
 
@@ -181,7 +181,7 @@ public class OurUser extends UserSync {
 			}
 		});
 
-		windows.btnEnvoyer.addActionListener(new ActionListener() {
+		windows.btnSendText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				Message message;
@@ -196,18 +196,18 @@ public class OurUser extends UserSync {
 			}
 		});
 
-		windows.btnActu.addActionListener(new ActionListener() {
+		windows.btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				windows.majFiles();
+				windows.updateFiles();
 				windows.frame.repaint();
 			}
 		});
 
-		windows.btnNewButton.addActionListener(new ActionListener() {
+		windows.btnSendFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					server.send(windows.list_1.getSelectedValue().toString(),
-							downloadFile(windows.list_1.getSelectedValue()
+					server.send(windows.fileList.getSelectedValue().toString(),
+							downloadFile(windows.fileList.getSelectedValue()
 									.toString()));
 				} catch (RemoteException e) {
 					e.printStackTrace();

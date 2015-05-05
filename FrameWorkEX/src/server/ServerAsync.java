@@ -48,7 +48,7 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 	 * @param name Le nom de l'objet à récupérer
 	 * @require !name.isEmpty()
 	 */
-	public Object takeObject(String name) throws RemoteException{
+	public Object getObject(String name) throws RemoteException{
 		try {
 			File file = new File("filesServer/" + name);
 			byte buffer[] = new byte[(int) file.length()];

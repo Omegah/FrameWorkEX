@@ -11,7 +11,7 @@ public interface _UserAsync extends _User {
 	 * @throws RemoteException
 	 * @require !name.isEmpty()
 	 */
-	public abstract Object takeObject(String name)throws RemoteException;
+	public abstract Object getObject(String name)throws RemoteException;
 	
 	/**
 	 * Envoi d'un objet sur le serveur

@@ -13,7 +13,7 @@ public class AppliUserAsync {
 		do{
 		System.out.println("Fichier à envoyer : ");
 		String name = sc.nextLine();
-		user.send(user.takeObject(name),name );
+		user.send(user.getObject(name),name );
 		}while(true);
 	}
 
