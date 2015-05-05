@@ -12,10 +12,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
-public abstract class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
+public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 
 
-	protected ServerAsync() throws RemoteException {
+	public ServerAsync() throws RemoteException {
 		super();
 	}
 
@@ -24,7 +24,7 @@ public abstract class ServerAsync extends UnicastRemoteObject implements _Server
 		try {
 			BufferedOutputStream output = new BufferedOutputStream(
 
-					new FileOutputStream("files/" + name));
+					new FileOutputStream("filesServer/" + name));
 			output.write(((byte[])obj), 0, ((byte[])obj).length);
 			output.flush();
 			output.close();
@@ -37,10 +37,9 @@ public abstract class ServerAsync extends UnicastRemoteObject implements _Server
 
 	public Object takeObject(String name) throws RemoteException{
 		try {
-			File file = new File("files/" + name);
+			File file = new File("filesServer/" + name);
 			byte buffer[] = new byte[(int) file.length()];
-			BufferedInputStream input = new BufferedInputStream(
-					new FileInputStream("files/" + name));
+			BufferedInputStream input = new BufferedInputStream(new FileInputStream("filesServer/" + name));
 			input.read(buffer, 0, buffer.length);
 			input.close();
 			return buffer;
