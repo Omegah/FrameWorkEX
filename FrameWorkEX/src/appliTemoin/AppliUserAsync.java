@@ -9,7 +9,7 @@ public class AppliUserAsync {
 	public static void main(String[] args) throws RemoteException {
 		// TODO Auto-generated method stub
 		OurUserAsync user = new OurUserAsync();
-		user.importServer("152.77.82.231", 1099);
+		user.importServer("152.77.82.230", 1099);
 		Scanner sc = new Scanner(System.in);
 		do{
 		System.out.println("Fichier à envoyer : ");

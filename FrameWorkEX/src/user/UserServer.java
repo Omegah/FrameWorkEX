@@ -13,13 +13,12 @@ import java.rmi.registry.LocateRegistry;
 
 import server._ServerAsync;
 
-public abstract class UserServer extends UserAsync implements _ServerAsync{
+public class UserServer extends UserAsync implements _ServerAsync {
 
-	protected UserServer() throws RemoteException {
+	public UserServer() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	public void createServer(String Ip, int Port) throws RemoteException {
 		try {
@@ -37,13 +36,12 @@ public abstract class UserServer extends UserAsync implements _ServerAsync{
 		}
 	}
 
-
-	public void sendObject(Object obj,String name) throws RemoteException {
+	public void sendObject(Object obj, String name) throws RemoteException {
 		try {
 			BufferedOutputStream output = new BufferedOutputStream(
 
-					new FileOutputStream("files/" + name));
-			output.write(((byte[])obj), 0, ((byte[])obj).length);
+			new FileOutputStream("files/" + name));
+			output.write(((byte[]) obj), 0, ((byte[]) obj).length);
 			output.flush();
 			output.close();
 
@@ -52,7 +50,7 @@ public abstract class UserServer extends UserAsync implements _ServerAsync{
 		}
 	}
 
-	public  Object takeObject(String name) throws RemoteException{
+	public Object takeObject(String name) throws RemoteException {
 		try {
 			File file = new File("files/" + name);
 			byte buffer[] = new byte[(int) file.length()];
@@ -64,6 +62,46 @@ public abstract class UserServer extends UserAsync implements _ServerAsync{
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@Override
+	public void receiveObject(String name, Object obj) throws RemoteException {
+		try {
+			BufferedOutputStream output = new BufferedOutputStream(
+
+			new FileOutputStream("files/" + name));
+			output.write(((byte[]) obj), 0, ((byte[]) obj).length);
+			output.flush();
+			output.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void send(Object obj) throws RemoteException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void execute(String name, Object obj) throws RemoteException {
+		if (obj instanceof byte[]) {
+			try {
+				BufferedOutputStream output = new BufferedOutputStream(
+
+				new FileOutputStream("files/" + name));
+				output.write(((byte[]) obj), 0, ((byte[]) obj).length);
+				output.flush();
+				output.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 }
