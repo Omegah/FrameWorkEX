@@ -7,14 +7,14 @@ public interface _UserSync extends _User{
 	/**
 	 * Abstraite: Implémenter la mise à jour de la représentation de la liste des utilisateurs connectés
 	 * @param activeUsers Liste des utilisateurs connectés
-	 * @throws RemoteException
+	 * @throws RemoteException Problème d'appel d'une méthode distante
 	 */
 	public abstract void updateUser(ArrayList<String> activeUsers)	throws RemoteException;
 	
 	/**
 	 * Obtention du nom de l'utilisateur
 	 * @return Le nom de l'utilisateur
-	 * @throws RemoteException
+	 * @throws RemoteException Problème d'appel d'une méthode distante
 	 */
 	public String getuName() throws RemoteException;
 	
@@ -22,7 +22,7 @@ public interface _UserSync extends _User{
 	 * Mise à jour de la représentation de la liste des utilisateurs connectés
 	 * Appel de la fonction abstraite updateUser()
 	 * @param activeUsers La liste des utilisateurs connectés
-	 * @throws RemoteException
+	 * @throws RemoteException Problème d'appel d'une méthode distante
 	 */
 	public void setOnlineusers(ArrayList<String> activeUsers) throws RemoteException;
 }

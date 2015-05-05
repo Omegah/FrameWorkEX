@@ -32,7 +32,7 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 	 * Création d'un serveur et initialisation de la liste d'utilisateurs
 	 * @param Ip Adresse IP du serveur
 	 * @param Port Numéro du port pour créer la connexion
-	 * @require Port > 1000 && Port < 65535
+	 * @requires {@literal Port > 1000 && Port < 65535}
 	 */
 	public void createServer(String Ip, int Port) throws RemoteException {
 		IpServer = Ip;
@@ -98,7 +98,7 @@ public class ServerSync extends UnicastRemoteObject implements _ServerSync {
 	/**
 	 * Suppression d'un utilisateur de la liste des utilisateurs
 	 * @param name Nom de l'utilisateur à supprimer
-	 * @require getActiveUsers.size()>0 && users.containsKey(name)
+	 * @requires {@literal getActiveUsers.size()> 0 && users.containsKey(name)}
 	 */
 	public void removeUser(String name) throws RemoteException {
 		users.remove(name);

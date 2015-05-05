@@ -14,8 +14,9 @@ public class Message extends UnicastRemoteObject implements _Message {
 	/**
 	 * Constructeur de Message
 	 * 
-	 * @param expediteur    Expediteur du message
-	 * @param message 		Texte du message
+	 * @param expediteur Expediteur du message
+	 * @param message Texte du message
+	 * @throws RemoteException Problème d'appel d'une méthode distante
 	 */
     public Message(String expediteur, String message)throws RemoteException
     {

@@ -37,7 +37,7 @@ public abstract class UserAsync extends UnicastRemoteObject implements _UserAsyn
 	 * Création de la connexion avec un serveur
 	 * @param ip Adresse IP du serveur
 	 * @param port Numéro de port pour la connexion
-	 * @require !ip.isEmpty() && port > 1000 && port < 65535
+	 * @requires {@literal !ip.isEmpty() && port > 1000 && port < 65535}
 	 */
 	public void importServer(String ip, int port) throws RemoteException {
 		try {
@@ -54,7 +54,7 @@ public abstract class UserAsync extends UnicastRemoteObject implements _UserAsyn
 	 * Envoie d'un objet sur le serveur
 	 * @param obj L'objet à déposer
 	 * @param name Le nom de l'objet
-	 * @require !name.isEmpty()
+	 * @requires !name.isEmpty()
 	 */
 	public void send(Object obj, String name) throws RemoteException {
 		server.send(obj, name);
@@ -63,7 +63,7 @@ public abstract class UserAsync extends UnicastRemoteObject implements _UserAsyn
 	/**
 	 * Récupération d'un objet sur le serveur
 	 * @param name Le nom de l'objet à récupérer
-	 * @require !name.isEmpty()
+	 * @requires !name.isEmpty()
 	 */
 	public Object getObject(String name) throws RemoteException{
 		try {

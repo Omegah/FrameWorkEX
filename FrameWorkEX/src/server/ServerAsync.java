@@ -46,7 +46,7 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 	/**
 	 * Récupération d'un objet depuis le serveur
 	 * @param name Le nom de l'objet à récupérer
-	 * @require !name.isEmpty()
+	 * @requires !name.isEmpty()
 	 */
 	public Object getObject(String name) throws RemoteException{
 		try {
@@ -65,9 +65,9 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 	
 	/**
 	 * Création du serveur
-	 * @param IP Adresse IP du serveur
+	 * @param Ip Adresse IP du serveur
 	 * @param Port Numéro de port pour la connexion
-	 * @require Port > 1000 && Port <65535
+	 * @requires {@literal Port > 1000 && Port <65535}
 	 */
 	public void createServer(String Ip, int Port) throws RemoteException {
 		try {

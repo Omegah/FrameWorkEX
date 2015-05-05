@@ -42,7 +42,6 @@ public class OurUser extends UserSync {
 		windows.frame.setTitle(uName);
 	}
 
-	@Override
 	public void execute(String filename, Object obj) {
 		if (obj instanceof _Message) {
 			message = ((_Message) obj);

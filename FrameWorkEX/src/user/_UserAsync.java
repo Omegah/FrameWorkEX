@@ -8,8 +8,8 @@ public interface _UserAsync extends _User {
 	 * Récupérer un objet depuis le serveur
 	 * @param name Nom de l'objet à récupérer
 	 * @return L'objet récupéré
-	 * @throws RemoteException
-	 * @require !name.isEmpty()
+	 * @throws RemoteException Problème d'appel d'une méthode distante
+	 * @requires !name.isEmpty()
 	 */
 	public abstract Object getObject(String name)throws RemoteException;
 	
@@ -17,7 +17,7 @@ public interface _UserAsync extends _User {
 	 * Envoi d'un objet sur le serveur
 	 * @param obj L'objet à envoyer
 	 * @param name Le nom de l'objet
-	 * @throws RemoteException
+	 * @throws RemoteException Problème d'appel d'une méthode distante
 	 */
 	public void send(Object obj, String name) throws RemoteException;
 }

@@ -32,9 +32,9 @@ public class UserServer extends UserAsync implements _ServerAsync {
 	
 	/**
 	 * Création du serveur
-	 * @param Ip Adresse IP du serveur
-	 * @param Port Numéro de port pour la connexion
-	 * @require !ip.isEmpty() && port >1000 && port < 65535
+	 * @param ip Adresse IP du serveur
+	 * @param port Numéro de port pour la connexion
+	 * @requires {@literal !ip.isEmpty() && port >1000 && port < 65535 }
 	 */
 	public void createServer(String ip, int port) throws RemoteException {
 		try {
@@ -70,7 +70,7 @@ public class UserServer extends UserAsync implements _ServerAsync {
 	/**
 	 * Récuperer un objet sur le serveur
 	 * @param name Le nom de l'objet à télécharger
-	 * @require !name.isEmpty()
+	 * @requires !name.isEmpty()
 	 */
 	public Object getObject(String name) throws RemoteException {
 		try {
@@ -96,7 +96,6 @@ public class UserServer extends UserAsync implements _ServerAsync {
 		execute(name,obj);
 	}
 
-	@Override
 	public void send(Object obj) throws RemoteException {
 	}
 

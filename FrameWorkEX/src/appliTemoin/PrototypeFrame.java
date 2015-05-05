@@ -103,9 +103,9 @@ public class PrototypeFrame {
 	}
 	
 	/**
-	 * mets a jours la liste des utilisateurs 
+	 * Mise à jour de la liste des utilisateurs
+	 * @param a Liste des utilisateurs connectés
 	 */
-
 	public void updateUsers(ArrayList<String> a) {
 		activeUsers = a;
 		userList.removeAll();
