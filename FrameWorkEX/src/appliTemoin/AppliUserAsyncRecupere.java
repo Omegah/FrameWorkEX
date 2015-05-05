@@ -17,5 +17,4 @@ public class AppliUserAsyncRecupere {
 		user.receiveObject(name,user.server.takeObject(name));
 		}while(true);
 	}
-
 }
