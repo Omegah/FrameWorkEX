@@ -52,7 +52,7 @@ public abstract class UserSync extends UnicastRemoteObject implements _UserSync 
 	 */
 	public void importServer(String ip, int port) throws RemoteException{
 				try {
-					server = (_ServerSync) Naming.lookup("rmi://"+ ip + "/Chat");
+					server = (_ServerSync) Naming.lookup("rmi://"+ ip +":" + port + "/Chat");
 				} catch (MalformedURLException | NotBoundException e) {
 					e.printStackTrace();
 				}
