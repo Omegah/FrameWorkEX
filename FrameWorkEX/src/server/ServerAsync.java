@@ -49,7 +49,10 @@ public class ServerAsync extends UnicastRemoteObject implements _ServerAsync {
 		}
 	}
 
-
+		/**
+	    *@ invariant
+	    *@ ensures Port > 1000 && Port < 655535;
+		*/
 	public void createServer(String Ip, int Port) throws RemoteException {
 		try {
 
